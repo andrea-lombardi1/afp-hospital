@@ -1,0 +1,46 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: lombardi
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: afp-hospital
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  iam:
+    role: arn:aws:iam::358398027076:role/LabRole
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  lista-pz:
+    handler: pazienti.listaPz
+    events:
+      - httpApi:
+          path: /lista-pz
+          method: get
+  accetta-pz:
+    handler: pazienti.accettaPz
+    events:
+      - httpApi:
+          path: /accetta-pz
+          method: post
+  trasferisci-pz:
+    handler: pazienti.trasferisciPz
+    events:
+      - httpApi:
+          path: /trasferisci-pz/{id}
+          method: put
+  dimetti-pz:
+    handler: pazienti.dimettiPz
+    events:
+      - httpApi:
+          path: /dimetti-pz/{id}
+          method: delete
+
+
+plugins:
+  - serverless-offline

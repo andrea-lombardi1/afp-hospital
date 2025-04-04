@@ -7,7 +7,13 @@ provider:
   name: aws
   runtime: nodejs20.x
   iam:
-    role: arn:aws:iam::358398027076:role/LabRole
+    role: ${file(./credentials.yml):IAM.role}
+  environment:
+    db_host: ${file(./credentials.yml):ENV.db_host}
+    user: ${file(./credentials.yml):ENV.user}
+    password: ${file(./credentials.yml):ENV.password}
+    database: ${file(./credentials.yml):ENV.database}
+    port: ${file(./credentials.yml):ENV.port}
 
 functions:
   hello:

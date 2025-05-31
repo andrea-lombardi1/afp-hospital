@@ -1,6 +1,4 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: lombardi
-# "service" is the name of this project. This will also be added to your AWS resource names.
 service: afp-hospital
 
 provider:
@@ -16,18 +14,30 @@ provider:
     port: ${file(./credentials.yml):ENV.port}
 
 functions:
-  hello:
-    handler: handler.hello
+  endpoints:
+    handler: handler.endpoints
     events:
       - httpApi:
           path: /
+          method: get
+  lista-ospedali:
+    handler: ospedali.listaOspedali
+    events:
+      - httpApi:
+          path: /lista-ospedali
+          method: get
+  lista-reparti:
+    handler: reparti.listaReparti
+    events:
+      - httpApi:
+          path: /lista-reparti/{ospedaleId}
           method: get
   lista-pz:
     handler: pazienti.listaPz
     events:
       - httpApi:
           path: /lista-pz
-          method: get
+          method: post
   accetta-pz:
     handler: pazienti.accettaPz
     events:

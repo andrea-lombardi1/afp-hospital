@@ -1,0 +1,182 @@
+<div class="form-container">
+  <h2>Patient Information Form</h2>
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+
+    <!-- Row with Nome and Cognome -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input id="nome" type="text" formControlName="nome" />
+      </div>
+
+      <div class="form-group">
+        <label for="cognome">Cognome:</label>
+        <input id="cognome" type="text" formControlName="cognome" />
+      </div>
+    </div>
+
+    <!-- Row with Data di Nascita and Codice Fiscale -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="dataNascita">Data di Nascita:</label>
+        <input id="dataNascita" type="date" formControlName="dataNascita" />
+      </div>
+
+      <div class="form-group">
+        <label for="codiceFiscale">Codice Fiscale:</label>
+        <input id="codiceFiscale" type="text" formControlName="codiceFiscale" />
+      </div>
+    </div>
+
+    <!-- Row with Ospedale, Reparto, Codice Colore -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="ospedale">Ospedale:</label>
+        <select id="ospedale" formControlName="ospedale">
+            <option value="">Seleziona Ospedale</option>
+            @for(ospedale of ospedaleOptions; track $index) {
+                <option [value]="ospedale">{{ ospedale }}</option>
+            }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reparto">Reparto:</label>
+        <select id="reparto" formControlName="reparto">
+          <option value="">Seleziona Reparto</option>
+          @for(reparto of repartoOptions; track $index) {
+              <option [value]="reparto">{{ reparto }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="codiceColore">Codice Colore:</label>
+        <select id="codiceColore" formControlName="codiceColore">
+            <option value="">Seleziona Codice Colore</option>
+            @for(codiceColore of codiceColoreOptions; track $index) {
+              <option [value]="codiceColore">{{ codiceColore }}</option>
+            }
+        </select>
+      </div>
+    </div>
+
+    <!-- Row with Codice and Stato -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="codice">Codice:</label>
+        <input id="codice" type="text" formControlName="codice" />
+      </div>
+
+      <div class="form-group">
+        <label for="stato">Stato:</label>
+        <input id="stato" type="text" formControlName="stato" />
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="patientForm.invalid">Submit</button>
+  </form>
+</div>
+
+<style>
+  .form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+  }
+
+  /* Flex row container for multiple inputs in one line */
+  .form-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    flex: 1; /* Equal width inputs */
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  input[type='text'],
+  input[type='date'],
+  select {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type='text']:focus,
+  input[type='date']:focus,
+  select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  .error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+
+  button:hover:not(:disabled) {
+    background-color: #2980b9;
+  }
+
+  /* Responsive adjustments for small screens */
+  @media (max-width: 720px) {
+    .form-row {
+      flex-direction: column;
+    }
+  }
+</style>
+
+
+
+
+<!-- kb4 -->
+<div class="container">
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <!-- 
+            nome, cognome,  data di nascita, codice fiscale, ospedale, reparto, codice colore, codice, stato, 
+
+
+            BIANCO, VERDE, AZZURRO, ARANCIONE, ROSSO
+        -->
+    </form>
+</div>

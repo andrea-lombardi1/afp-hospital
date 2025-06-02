@@ -4,11 +4,24 @@
         nella navbar c'è un menu a tendina con tutti gli ospedali e la get della lista ospedali. quando si preme su uno di questi, chiama
         (post) lista pazienti con l'id dell'ospedale 
     -->
-
-    <app-paziente-list-item></app-paziente-list-item>
-    <app-paziente-list-item></app-paziente-list-item>
-    <app-paziente-list-item></app-paziente-list-item>
-    <app-paziente-list-item></app-paziente-list-item>
-    <app-paziente-list-item></app-paziente-list-item>
-    <app-paziente-list-item></app-paziente-list-item>
+        <div style="background-color: red;">CODICE ROSSO</div>
+    @for(paziente of pazienti().ROSSO; track $index) {
+        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
+    }
+        <div style="background-color: orange;">CODICE ARANCIONE</div>
+    @for(paziente of pazienti().ARANCIONE; track $index) {
+        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
+    }
+        <div style="background-color: blue;">CODICE AZZURRO</div>
+    @for(paziente of pazienti().AZZURRO; track $index) {
+        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
+    }
+        <div style="background-color: green;">CODICE VERDE</div>
+    @for(paziente of pazienti().VERDE; track $index) {
+        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
+    }
+        <div>CODICE BIANCO</div>
+    @for(paziente of pazienti().BIANCO; track $index) {
+        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
+    }
 </div>

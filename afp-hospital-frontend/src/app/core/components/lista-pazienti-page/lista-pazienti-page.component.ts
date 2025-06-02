@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { PazienteListItemComponent } from '../../utils/paziente-list-item/paziente-list-item.component';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-lista-pazienti-page',
@@ -13,5 +14,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './lista-pazienti-page.component.css'
 })
 export class ListaPazientiPageComponent {
+  apiService = inject(ApiService);
 
+  pazienti = computed(() => this.apiService.listaPz());
 }

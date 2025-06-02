@@ -11,17 +11,21 @@ const dbConf = {
 
 export const listaReparti = async (event) => {
   let connection;
-  let ospedaleId = event.queryStringParameters.ospedaleId;
+  let ospedaleId = event.pathParameters?.ospedaleId || null;
 
   try {
     connection = await mysql.createConnection(dbConf);
-    const [row] = await connection.execute(`
-            SELECT
-                id,
-                nome,
-                descrizione
-                FROM reparto
-                WHERE ospedale_id = ?`, [ospedaleId]);
+    let query = `
+      SELECT
+      id,
+      nome,
+      descrizione
+      FROM reparto
+    `;
+    if (ospedaleId !== null) {
+      query += ' WHERE ospedale_id = ' + ospedaleId;
+    }
+    const [row] = await connection.execute(query);
     return createHttpResponseOK(row);
   } catch (error) {
     return createHttpResponseKO(error);

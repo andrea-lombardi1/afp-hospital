@@ -4,6 +4,11 @@ import { AccettaPazientePageComponent } from './core/components/accetta-paziente
 import { NotFoundPageComponent} from './core/components/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
+    {
+        path: "",
+        redirectTo: "pazienti",
+        pathMatch: "full"
+    },
     { 
         // lista pazienti 
         path: "pazienti",

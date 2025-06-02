@@ -1,6 +1,18 @@
 <div class="container">
-    <span class="codice-paziente">AL2004</span>
-    <span class="paziente-nome-cognome">Mario Rossi</span>
-    <span class="nome-reparto">Pronto Soccorso</span>
-    <span class="orario-accettazione">11:45:30</span>
+  <span class="codice-paziente">{{ paziente().codice }}</span>
+  <span class="paziente-nome-cognome"
+    >{{ paziente().nome }} {{ paziente().cognome }}</span
+  >
+  <span class="nome-ospedale">{{ paziente().nome_ospedale }}</span>
+  <span class="nome-reparto">{{ paziente().nome_reparto }}</span>
+  <span>
+    @if(paziente().stato === 'IN ATTESA' || paziente().stato === 'IN CARICO') {
+    <button class="stato">{{ paziente().stato }}</button>
+    } @else {
+    {{ paziente().stato }}
+    }
+  </span>
+  <span class="orario-accettazione">{{
+    paziente().data_inserimento | date : "dd/MM/yyyy"
+  }}</span>
 </div>

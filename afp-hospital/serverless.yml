@@ -26,18 +26,30 @@ functions:
       - httpApi:
           path: /lista-ospedali
           method: get
+  lista-reparti-all:
+    handler: reparti.listaReparti
+    events:
+      - httpApi:
+          path: /lista-reparti
+          method: get
   lista-reparti:
     handler: reparti.listaReparti
     events:
       - httpApi:
           path: /lista-reparti/{ospedaleId}
           method: get
-  lista-pz:
+  lista-pz-all:
     handler: pazienti.listaPz
     events:
       - httpApi:
           path: /lista-pz
-          method: post
+          method: get
+  lista-pz:
+    handler: pazienti.listaPz
+    events:
+      - httpApi:
+          path: /lista-pz/{ospedaleId}
+          method: get
   accetta-pz:
     handler: pazienti.accettaPz
     events:

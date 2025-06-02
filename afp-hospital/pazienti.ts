@@ -11,34 +11,45 @@ const dbConf = {
 
 export const listaPz = async (event) => {
   let connection;
-  let ospedaleId = JSON.parse(event.body || "{}").ospedaleId || null;
-
+  let ospedaleId = event.pathParameters?.ospedaleId || null;
+  
   try {
     connection = await mysql.createConnection(dbConf);
     let query = `
-                    SELECT
-                            p.id AS id_paziente,
-                            p.codice,
-                            p.codice_colore,
-                            p.stato,
-                            p.data_inserimento,
-                            r.id AS id_reparto,
-                            r.nome AS nome_reparto,
-                            r.descrizione,
-                            a.id AS id_anagrafica,
-                            a.nome,
-                            a.cognome,
-                            a.codice_fiscale,
-                            a.data_nascita
-                    FROM paziente p
-                    JOIN reparto r ON p.id = r.id
-                    JOIN anagrafica a ON p.id = a.id
-            `;
+      SELECT
+      p.id AS id_paziente,
+      p.codice,
+      p.codice_colore,
+      p.stato,
+      p.data_inserimento,
+      r.id AS id_reparto,
+      r.nome AS nome_reparto,
+      r.descrizione,
+      a.id AS id_anagrafica,
+      a.nome,
+      a.cognome,
+      a.codice_fiscale,
+      a.data_nascita
+      ${ospedaleId == null ? ', o.id AS id_ospedale, o.nome AS nome_ospedale' : ''}
+      FROM paziente p
+      LEFT JOIN reparto r ON p.reparto_id = r.id
+      JOIN anagrafica a ON p.anagrafica_id = a.id
+      ${ospedaleId == null ? 'LEFT JOIN ospedale o ON p.ospedale_id = o.id' : ''}
+    `;
     if (ospedaleId !== null) {
-      query += " WHERE r.ospedale_id = " + ospedaleId;
+      query += " WHERE p.ospedale_id = " + ospedaleId;
     }
     const [row] = await connection.execute(query);
-    return createHttpResponseOK(row);
+    // "ROSSO": [], "ARANCIONE": [], "AZZURRO": [], "VERDE": [], "BIANCO": []
+    const pazienti = row.reduce((acc, paziente) => {
+      const colore = paziente.codice_colore.toUpperCase();
+      if (!acc[colore]) {
+        acc[colore] = [];
+      }
+      acc[colore].push(paziente);
+      return acc;
+    }, {});
+    return createHttpResponseOK(pazienti);
   } catch (error) {
     return createHttpResponseKO(error);
   } finally {
@@ -56,6 +67,8 @@ export const accettaPz = async (event) => {
       return createHttpResponseKO(new Error("Missing body"));
     }
     let pzTmp = JSON.parse(event.body);
+    console.log(pzTmp);
+    
 
     const [pzCreation] = await connection.execute(
       `
@@ -71,12 +84,13 @@ export const accettaPz = async (event) => {
 
     let pzNewId = pzCreation.insertId;
     let now = new Date();
+    let pzCodice = `${pzTmp.nome.substring(0, 2).toUpperCase()}${pzTmp.cognome.substring(0, 2).toUpperCase()}${pzTmp.dataNascita.substring(2, 4)}`;
 
     const [newPaziente] = await connection.execute(
       `
                     INSERT INTO paziente (anagrafica_id, reparto_id, codice, codice_colore, stato, ospedale_id, data_inserimento)
                     VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [pzNewId, pzTmp.repartoId, pzTmp.codice, pzTmp.codiceColore, pzTmp.stato, pzTmp.ospedaleId, now]
+      [pzNewId, pzTmp.repartoId ?? null, pzCodice, pzTmp.codiceColore, pzTmp.stato, pzTmp.ospedaleId, now]
     );
 
     return createHttpResponseOK({

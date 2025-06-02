@@ -1,7 +1,8 @@
+<app-navbar></app-navbar>
+
 <div class="form-container">
   <h2>Patient Information Form</h2>
   <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-
     <!-- Row with Nome and Cognome -->
     <div class="form-row">
       <div class="form-group">
@@ -33,44 +34,55 @@
       <div class="form-group">
         <label for="ospedale">Ospedale:</label>
         <select id="ospedale" formControlName="ospedale">
-            <option value="">Seleziona Ospedale</option>
-            @for(ospedale of ospedaleOptions; track $index) {
-                <option [value]="ospedale">{{ ospedale }}</option>
-            }
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="reparto">Reparto:</label>
-        <select id="reparto" formControlName="reparto">
-          <option value="">Seleziona Reparto</option>
-          @for(reparto of repartoOptions; track $index) {
-              <option [value]="reparto">{{ reparto }}</option>
+          <option value="">Seleziona Ospedale</option>
+          @for(ospedale of ospedaleOptions(); track $index) {
+          <option [value]="ospedale.id">{{ ospedale.nome }}</option>
           }
         </select>
       </div>
 
       <div class="form-group">
+        <label for="reparto">Reparto:</label>
+        @if(repartoOptions().length === 0){
+        <select id="reparto" disabled class="text-gray-500">
+          <option value="">Seleziona Reparto</option>
+        </select>
+        } @else {
+        <select id="reparto" formControlName="reparto">
+          <option value="">Seleziona Reparto</option>
+          @for(reparto of repartoOptions(); track $index) {
+          <option [value]="reparto.id">{{ reparto.nome }}</option>
+          }
+        </select>
+        }
+      </div>
+
+      <div class="form-group">
         <label for="codiceColore">Codice Colore:</label>
         <select id="codiceColore" formControlName="codiceColore">
-            <option value="">Seleziona Codice Colore</option>
-            @for(codiceColore of codiceColoreOptions; track $index) {
-              <option [value]="codiceColore">{{ codiceColore }}</option>
-            }
+          <option value="">Seleziona Codice Colore</option>
+          @for(codiceColore of codiceColoreOptions; track $index) {
+          <option [value]="codiceColore">{{ codiceColore }}</option>
+          }
         </select>
       </div>
     </div>
 
     <!-- Row with Codice and Stato -->
     <div class="form-row">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="codice">Codice:</label>
         <input id="codice" type="text" formControlName="codice" />
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="stato">Stato:</label>
-        <input id="stato" type="text" formControlName="stato" />
+        <select id="stato" formControlName="stato">
+          <option disabled>Seleziona Stato</option>
+          @for(stato of statoOptions; track $index) {
+          <option [value]="stato">{{ stato }}</option>
+          }
+        </select>
       </div>
     </div>
 
@@ -85,7 +97,7 @@
     background: #ffffff;
     padding: 2.5rem;
     border-radius: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
@@ -114,8 +126,8 @@
     color: #34495e;
   }
 
-  input[type='text'],
-  input[type='date'],
+  input[type="text"],
+  input[type="date"],
   select {
     padding: 0.75rem;
     font-size: 1.1rem;
@@ -124,8 +136,8 @@
     transition: border-color 0.3s ease;
   }
 
-  input[type='text']:focus,
-  input[type='date']:focus,
+  input[type="text"]:focus,
+  input[type="date"]:focus,
   select:focus {
     border-color: #3498db;
     outline: none;
@@ -166,17 +178,14 @@
   }
 </style>
 
-
-
-
 <!-- kb4 -->
 <div class="container">
-    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-        <!-- 
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+    <!-- 
             nome, cognome,  data di nascita, codice fiscale, ospedale, reparto, codice colore, codice, stato, 
 
 
             BIANCO, VERDE, AZZURRO, ARANCIONE, ROSSO
         -->
-    </form>
+  </form>
 </div>

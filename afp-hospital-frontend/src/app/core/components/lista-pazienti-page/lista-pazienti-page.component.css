@@ -1,4 +1,4 @@
-/* Container principale */
+/* Container principale
 .container {
   padding: 1rem;
   display: flex;
@@ -8,24 +8,24 @@
 }
 
 /* Titoli dei codici triage */
-.codice {
+/* .codice {
   padding: 0.75rem 1rem;
   font-weight: bold;
   font-size: 18px;
   color: white;
   border-radius: 4px;
-}
+} */
 
 /* Colori specifici */
-.codice-rosso {
+/* .codice-rosso {
   background-color: #d32f2f;
-}
+} */
 
-.codice-arancione {
+/* .codice-arancione {
   background-color: #ef6c00;
-}
+} */
 
-.codice-azzurro {
+/* .codice-azzurro {
   background-color: #1976d2;
 }
 
@@ -36,4 +36,4 @@
 .codice-bianco {
   background-color: #e0e0e0;
   color: #333;
-}
+} */

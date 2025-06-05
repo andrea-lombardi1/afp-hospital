@@ -5,14 +5,25 @@ import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import Aura from '@primeng/themes/aura';
 
-
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(), providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        }), 
-        provideAnimationsAsync()],
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          cssLayer: {
+            name: 'primeng',
+            darkModeSelector: 'system',
+            order: 'theme, base, primeng',
+          },
+        },
+      },
+    }),
+    provideAnimationsAsync(),
+  ],
 };

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { PazienteListItemComponent } from '../../utils/paziente-list-item/paziente-list-item.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ApiService } from '../../services/api.service';

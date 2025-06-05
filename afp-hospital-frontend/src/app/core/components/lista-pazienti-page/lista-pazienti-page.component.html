@@ -1,30 +1,26 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <!-- 
-        nella navbar c'è un menu a tendina con tutti gli ospedali e la get della lista ospedali. quando si preme su uno di questi, chiama
-        (post) lista pazienti con l'id dell'ospedale 
-    -->
-  <div class="codice codice-rosso">CODICE ROSSO</div>
+<div class="p-4 flex flex-col gap-6 bg-white dark:bg-gray-800">
+  <div class="py-3 px-4 font-bold text-lg text-white rounded bg-red-600">CODICE ROSSO</div>
   @for(paziente of pazienti().ROSSO; track $index) {
   <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
   }
 
-  <div class="codice codice-arancione">CODICE ARANCIONE</div>
+  <div class="py-3 px-4 font-bold text-lg text-white rounded bg-orange-600">CODICE ARANCIONE</div>
   @for(paziente of pazienti().ARANCIONE; track $index) {
   <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
   }
 
-  <div class="codice codice-azzurro">CODICE AZZURRO</div>
+  <div class="py-3 px-4 font-bold text-lg text-white rounded bg-blue-600">CODICE AZZURRO</div>
   @for(paziente of pazienti().AZZURRO; track $index) {
   <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
   }
 
-  <div class="codice codice-verde">CODICE VERDE</div>
+  <div class="py-3 px-4 font-bold text-lg text-white rounded bg-green-600">CODICE VERDE</div>
   @for(paziente of pazienti().VERDE; track $index) {
   <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
   }
 
-  <div class="codice codice-bianco">CODICE BIANCO</div>
+  <div class="py-3 px-4 font-bold text-lg rounded bg-gray-300 text-gray-800">CODICE BIANCO</div>
   @for(paziente of pazienti().BIANCO; track $index) {
   <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
   }

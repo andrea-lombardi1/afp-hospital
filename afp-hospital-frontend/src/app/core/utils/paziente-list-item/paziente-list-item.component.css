@@ -26,33 +26,37 @@
 .nome-reparto, .nome-ospedale {
     font-style: italic;
     color: #555;
-    min-width: 120px;
+    width: 150px;
+    min-height: 1em;
+    flex-shrink: 0;
 }
 
-/* .stato {
-    font-weight: 500;
-    border: #333 solid 1px;
-    border-radius: 4px;
-    padding: 4px 8px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    color: black;
-    min-width: 100px;
-} */
+.stato-container {
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
 
 .stato {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    background-color: #0053ba;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 83, 186, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #0053ba;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px; /* Ridotto */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 83, 186, 0.3);
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  max-width: 100%;
 }
+
 
 .stato:hover {
     background-color: #003d8a;

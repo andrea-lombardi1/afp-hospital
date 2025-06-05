@@ -1,6 +1,6 @@
-import { Component, input, OnInit } from '@angular/core';
-import { Paziente } from '../../models/Paziente.model';
 import { CommonModule } from '@angular/common';
+import { Component, input, OnInit, output } from '@angular/core';
+import { Paziente } from '../../models/Paziente.model';
 
 @Component({
   selector: 'app-paziente-list-item',
@@ -11,8 +11,13 @@ import { CommonModule } from '@angular/common';
 export class PazienteListItemComponent implements OnInit {
 
   paziente = input.required<Paziente>();
+  outPaziente = output<Paziente>();
 
   ngOnInit(): void {
     
   }
+  cambiaStato() {
+    this.outPaziente.emit(this.paziente());
+  }
+
 }

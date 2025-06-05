@@ -17,7 +17,7 @@
   <!-- Middle section with select -->
   <div class="flex-1 max-w-md mx-4">
     <select (change)="filterPz()" [formControl]="ospedaleIdControl"
-      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="appearance-none text-black bg-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
       <option selected value="">Tutti gli ospedali</option>
       @for(ospedale of ospedali(); track $index) {

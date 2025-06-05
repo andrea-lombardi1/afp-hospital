@@ -64,7 +64,25 @@ export class ApiService {
       )
       .subscribe((data) => {
         if (data.state === 'KO') console.error(data.error);
-        this.#router.navigate(['/lista-pz']);
+        this.#router.navigate(['/pazienti']);
+      });
+  }
+
+  modificaStatoPaziente(idPaziente: number, statoPaziente: string, ospedalePaziente: number | null, repartoPaziente: number | null): void {
+    this.#http
+      .put<HttpRes>(`${this.#URL}/modifica-pz/${idPaziente}`, {
+        stato: statoPaziente,
+        ospedaleId: ospedalePaziente,
+        repartoId: repartoPaziente,
+      })
+      .pipe(
+        retry(3),
+        finalize(() => this.getListaPazienti())
+      )
+      .subscribe((res) => {
+        if (res.state === 'KO') {
+          console.error(res.error);
+        }
       });
   }
 

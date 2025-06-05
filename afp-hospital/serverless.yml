@@ -56,6 +56,12 @@ functions:
       - httpApi:
           path: /accetta-pz
           method: post
+  modifica-pz:
+    handler: pazienti.modificaPz
+    events:
+      - httpApi:
+          path: /modifica-pz/{id}
+          method: put
   trasferisci-pz:
     handler: pazienti.trasferisciPz
     events:

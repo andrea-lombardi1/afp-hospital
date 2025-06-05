@@ -105,6 +105,38 @@ export const accettaPz = async (event) => {
     }
   }
 };
+export const modificaPz = async (event) => {
+  let connection;
+  try {
+    connection = await mysql.createConnection(dbConf);
+    if (!event.pathParameters) {
+      return createHttpResponseKO(new Error("Missing id"));
+    }
+    let pzId = event.pathParameters.id;
+    let stato = JSON.parse(event.body || "{}").stato || null;
+    let repartoId = JSON.parse(event.body || "{}").repartoId || null;
+    let ospedaleId = JSON.parse(event.body || "{}").ospedaleId || null;
+
+    const [pzUpdate] = await connection.execute(
+      `
+        UPDATE paziente p
+        SET stato = ?, reparto_id = ?, ospedale_id = ?
+        WHERE p.id = ?`,
+      [stato, repartoId, ospedaleId, pzId]
+    );
+
+    return createHttpResponseOK({
+      messaggio: `Paziente ${pzId} modificato`,
+      affectedRows: pzUpdate.affectedRows,
+    });
+  } catch (error) {
+    return createHttpResponseKO(error);
+  } finally {
+    if (connection) {
+      await connection.end();
+    }
+  }
+};
 export const trasferisciPz = async (event) => {
   let connection;
   try {

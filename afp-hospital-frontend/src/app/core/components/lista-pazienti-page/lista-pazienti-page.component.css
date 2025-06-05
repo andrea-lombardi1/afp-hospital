@@ -1,5 +1,39 @@
-.container{
-    text-align: center;
-    margin: auto;
-    width: 100%;
+/* Container principale */
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #ffffff;
+}
+
+/* Titoli dei codici triage */
+.codice {
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Colori specifici */
+.codice-rosso {
+  background-color: #d32f2f;
+}
+
+.codice-arancione {
+  background-color: #ef6c00;
+}
+
+.codice-azzurro {
+  background-color: #1976d2;
+}
+
+.codice-verde {
+  background-color: #388e3c;
+}
+
+.codice-bianco {
+  background-color: #e0e0e0;
+  color: #333;
 }

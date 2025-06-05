@@ -6,11 +6,14 @@
   <span class="nome-ospedale">{{ paziente().nome_ospedale }}</span>
   <span class="nome-reparto">{{ paziente().nome_reparto }}</span>
   <span>
-    @if(paziente().stato === 'IN ATTESA' || paziente().stato === 'IN CARICO') {
-    <button class="stato">{{ paziente().stato }}</button>
-    } @else {
-    {{ paziente().stato }}
-    }
+    <span class="stato-container">
+      @if(paziente().stato === 'IN ATTESA' || paziente().stato === 'IN CARICO')
+      {
+      <button class="stato" (click)="cambiaStato()">{{ paziente().stato }}</button>
+      } @else {
+      <span>{{ paziente().stato }}</span>
+      }
+    </span>
   </span>
   <span class="orario-accettazione">{{
     paziente().data_inserimento | date : "dd/MM/yyyy"

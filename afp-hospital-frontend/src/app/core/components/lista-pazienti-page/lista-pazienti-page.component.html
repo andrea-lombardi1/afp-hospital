@@ -1,27 +1,85 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <!-- 
+  <!-- 
         nella navbar c'è un menu a tendina con tutti gli ospedali e la get della lista ospedali. quando si preme su uno di questi, chiama
         (post) lista pazienti con l'id dell'ospedale 
     -->
-        <div style="background-color: red;">CODICE ROSSO</div>
-    @for(paziente of pazienti().ROSSO; track $index) {
-        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
-    }
-        <div style="background-color: orange;">CODICE ARANCIONE</div>
-    @for(paziente of pazienti().ARANCIONE; track $index) {
-        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
-    }
-        <div style="background-color: blue;">CODICE AZZURRO</div>
-    @for(paziente of pazienti().AZZURRO; track $index) {
-        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
-    }
-        <div style="background-color: green;">CODICE VERDE</div>
-    @for(paziente of pazienti().VERDE; track $index) {
-        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
-    }
-        <div>CODICE BIANCO</div>
-    @for(paziente of pazienti().BIANCO; track $index) {
-        <app-paziente-list-item [paziente]="paziente"></app-paziente-list-item>
-    }
+  <div class="codice codice-rosso">CODICE ROSSO</div>
+  @for(paziente of pazienti().ROSSO; track $index) {
+  <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
+  }
+
+  <div class="codice codice-arancione">CODICE ARANCIONE</div>
+  @for(paziente of pazienti().ARANCIONE; track $index) {
+  <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
+  }
+
+  <div class="codice codice-azzurro">CODICE AZZURRO</div>
+  @for(paziente of pazienti().AZZURRO; track $index) {
+  <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
+  }
+
+  <div class="codice codice-verde">CODICE VERDE</div>
+  @for(paziente of pazienti().VERDE; track $index) {
+  <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
+  }
+
+  <div class="codice codice-bianco">CODICE BIANCO</div>
+  @for(paziente of pazienti().BIANCO; track $index) {
+  <app-paziente-list-item [paziente]="paziente" (outPaziente)="cambiaStatoList($event)"></app-paziente-list-item>
+  }
 </div>
+<p-dialog
+  header="Modifica stato paziente: {{ pazienteSelezionato?.nome }} {{ pazienteSelezionato?.cognome }}"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+>
+  <div class="flex items-center gap-4 mb-16">
+    <label for="stato" class="font-semibold w-24">Stato</label>
+    <p-select
+      id="stato"
+      class="flex-auto"
+      [options]="statiPaziente"
+      [(ngModel)]="selectedStato"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Seleziona stato"
+    >
+    </p-select>
+  </div>
+  @if(selectedStato !== 'DIMESSO') {
+  <div class="flex items-center gap-4 mb-4">
+    <label for="ospedale" class="font-semibold w-24">Ospedale</label>
+    <p-select
+      id="ospedale"
+      class="flex-auto"
+      [options]="ospedali"
+      [(ngModel)]="selectedOspedale"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Seleziona ospedale"
+      (onChange)="setReparti($event.value)"
+    >
+    </p-select>
+  </div>
+  @if(selectedOspedale) {
+  <div class="flex items-center gap-4 mb-16">
+    <label for="reparto" class="font-semibold w-24">Reparto</label>
+    <p-select
+      id="reparto"
+      class="flex-auto"
+      [options]="reparti"
+      [(ngModel)]="selectedReparto"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Seleziona reparto"
+    >
+    </p-select>
+  </div>
+  } }
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancella" severity="secondary" (click)="visible = false" />
+    <p-button label="Salva" (click)="modificaPaziente()" />
+  </div>
+</p-dialog>

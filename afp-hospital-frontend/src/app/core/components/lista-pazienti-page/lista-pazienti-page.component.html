@@ -1,4 +1,11 @@
 <app-navbar></app-navbar>
+<div class="flex justify-between gap-2 mb-4 p-8">
+  <div class="p-8 text-4xl text-white bg-red-600 rounded font-bold">{{pazienti().ROSSO?.length ?? 0}}</div>
+  <div class="p-8 text-4xl text-white bg-orange-600 rounded font-bold">{{pazienti().ARANCIONE?.length ?? 0}}</div>
+  <div class="p-8 text-4xl text-white bg-blue-600 rounded font-bold">{{pazienti().AZZURRO?.length ?? 0}}</div>
+  <div class="p-8 text-4xl text-white bg-green-600 rounded font-bold">{{pazienti().VERDE?.length ?? 0}}</div>
+  <div class="p-8 text-4xl text-gray-800 bg-gray-300 rounded font-bold">{{pazienti().BIANCO?.length ?? 0}}</div>
+</div>
 <div class="p-4 flex flex-col gap-6 bg-white dark:bg-gray-800">
   <div class="py-3 px-4 font-bold text-lg text-white rounded bg-red-600">CODICE ROSSO</div>
   @for(paziente of pazienti().ROSSO; track $index) {

@@ -1,4 +1,4 @@
-
+/* 
 .container {
     display: flex;
     background: #fff;
@@ -47,7 +47,7 @@
   background-color: #0053ba;
   border: none;
   border-radius: 6px;
-  padding: 6px 10px; /* Ridotto */
+  padding: 6px 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 8px rgba(0, 83, 186, 0.3);
@@ -73,4 +73,4 @@
     color: #999;
     min-width: 100px;
     text-align: right;
-}
+} */

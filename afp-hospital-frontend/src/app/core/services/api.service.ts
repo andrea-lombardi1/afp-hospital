@@ -11,7 +11,7 @@ import { RepartiModel } from '../models/RepartiModel';
   providedIn: 'root',
 })
 export class ApiService {
-  readonly #URL = 'http://localhost:3000';
+  readonly #URL = 'https://r5z0p2uesj.execute-api.us-east-1.amazonaws.com';
 
   readonly #http = inject(HttpClient);
   readonly #router = inject(Router);

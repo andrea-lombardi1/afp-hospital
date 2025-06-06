@@ -84,7 +84,7 @@ export const accettaPz = async (event) => {
 
     let pzNewId = pzCreation.insertId;
     let now = new Date();
-    let pzCodice = `${pzTmp.nome.substring(0, 2).toUpperCase()}${pzTmp.cognome.substring(0, 2).toUpperCase()}${pzTmp.dataNascita.substring(2, 4)}`;
+    let pzCodice = `${pzNewId}-${pzTmp.nome.substring(0, 2).toUpperCase()}${pzTmp.cognome.substring(0, 2).toUpperCase()}${pzTmp.dataNascita.substring(2, 4)}`;
 
     const [newPaziente] = await connection.execute(
       `

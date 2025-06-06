@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PazienteListItemComponent } from './core/utils/paziente-list-item/paziente-list-item.component';
+import { PazienteListItemComponent } from './core/components/paziente-list-item/paziente-list-item.component';
 
 
 @Component({

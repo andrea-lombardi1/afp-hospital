@@ -12,6 +12,18 @@ provider:
     password: ${file(./credentials.yml):ENV.password}
     database: ${file(./credentials.yml):ENV.database}
     port: ${file(./credentials.yml):ENV.port}
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedHeaders:
+        - '*'
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
 
 functions:
   endpoints:

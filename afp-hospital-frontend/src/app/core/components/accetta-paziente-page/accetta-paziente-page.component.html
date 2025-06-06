@@ -1,10 +1,20 @@
 <app-navbar></app-navbar>
 
 <div class="form-container">
-  <h2>Patient Information Form</h2>
+  <h2>Aggiungi paziente</h2>
   <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
     <!-- Row with Nome and Cognome -->
     <div class="form-row">
+
+      <div class="form-group">
+        <label for="anonymouseMode">Paziente anonimo?</label>
+        <input
+          type="checkbox"
+          style="width: 24px; height: 24px;"
+          (click)="switchAnonymousMode()"
+          [checked]="anonymouseMode()"
+        />
+      </div>
       <div class="form-group">
         <label for="nome">Nome:</label>
         <input id="nome" type="text" formControlName="nome" />
@@ -12,7 +22,11 @@
 
       <div class="form-group">
         <label for="cognome">Cognome:</label>
-        <input id="cognome" type="text" formControlName="cognome" />
+        <input
+          id="cognome"
+          type="text"
+          formControlName="cognome"
+        />
       </div>
     </div>
 
@@ -58,7 +72,7 @@
       </div>
 
       <div class="form-group">
-        <label for="codiceColore">Codice Colore:</label>
+        <label for="codiceColore">Codice Colore: <u>(AIUTO)</u></label>
         <select id="codiceColore" formControlName="codiceColore">
           <option value="">Seleziona Codice Colore</option>
           @for(codiceColore of codiceColoreOptions; track $index) {
@@ -89,8 +103,6 @@
     <button type="submit" [disabled]="patientForm.invalid">Submit</button>
   </form>
 </div>
-
-
 
 <!-- kb4 -->
 <div class="container">

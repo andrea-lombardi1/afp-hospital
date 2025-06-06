@@ -1,0 +1,42 @@
+<div class="flex flex-col sm:flex-row bg-white rounded-lg shadow-md p-3 sm:p-4 mb-2 sm:mb-3 items-start sm:items-center text-gray-800 gap-2 sm:gap-4 lg:gap-6 transition-shadow hover:shadow-lg">
+  <!-- Patient Code -->
+  <span class="font-bold text-blue-600 text-sm sm:text-base min-w-0 sm:min-w-[80px] order-1">
+    {{ paziente().codice }}
+  </span>
+  
+  <!-- Patient Name -->
+  <span class="font-semibold text-sm sm:text-base flex-1 min-w-0 truncate order-2">
+    {{ paziente().nome }} {{ paziente().cognome }}
+  </span>
+  
+  <!-- Hospital and Department - Stack on mobile, side by side on larger screens -->
+  <div class="flex flex-col sm:flex-row gap-1 sm:gap-4 text-xs sm:text-sm order-4 sm:order-3 w-full sm:w-auto">
+    <span class="italic text-gray-600 sm:w-32 lg:w-40 truncate">
+      {{ paziente().nome_ospedale }}
+    </span>
+    <span class="italic text-gray-600 sm:w-32 lg:w-40 truncate">
+      {{ paziente().nome_reparto }}
+    </span>
+  </div>
+  
+  <!-- Status Button/Text -->
+  <div class="flex justify-start sm:justify-center items-center min-w-0 sm:w-32 lg:w-36 order-3 sm:order-4">
+    @if(paziente().stato === 'IN ATTESA' || paziente().stato === 'IN CARICO') {
+      <button 
+        class="bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white font-semibold text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 rounded-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 shadow-md hover:shadow-lg whitespace-nowrap max-w-full truncate"
+        (click)="cambiaStato()"
+      >
+        {{ paziente().stato }}
+      </button>
+    } @else {
+      <span class="text-xs sm:text-sm font-medium text-gray-700 px-2 py-1 bg-gray-100 rounded-md whitespace-nowrap">
+        {{ paziente().stato }}
+      </span>
+    }
+  </div>
+  
+  <!-- Date -->
+  <span class="text-xs sm:text-sm text-gray-500 min-w-0 sm:min-w-[100px] text-left sm:text-right order-5">
+    {{ paziente().data_inserimento | date : "dd/MM/yyyy" }}
+  </span>
+</div>

@@ -24,6 +24,10 @@ provider:
         - PUT
         - DELETE
         - OPTIONS
+custom:
+  serverless-offline:
+    port: 3000
+  serverlessAccessKey: ${file(./credentials.yml):SERVERLESS.accessKey}
 
 functions:
   endpoints:

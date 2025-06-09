@@ -1,0 +1,51 @@
+networks:
+  afp-hospital-network:
+    driver: bridge
+
+services:
+  afp-hospital-database:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - ./DB:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE: ospedali-afp
+      MYSQL_USER: user
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_HOST: db
+    networks:
+      - afp-hospital-network
+
+  afp-hospital-frontend:
+    build:
+      context: ./afp-hospital-frontend
+    ports:
+      - 4200:4200
+    networks:
+      - afp-hospital-network
+
+  afp-hospital-backend:
+    build:
+      context: ./afp-hospital-backend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - afp-hospital-network
+    depends_on:
+      - afp-hospital-database
+    environment:
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: ospedali-afp
+      MYSQL_USER: user
+      MYSQL_HOST: db
+
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password
+  db_password:
+    file: ./secrets/db_password
+
+
